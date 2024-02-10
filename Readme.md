@@ -18,7 +18,7 @@ The game requires access to the device's camera. Make sure your browser supports
 - **Result Display**: The classification result is displayed to the user.
 
 ## Note
-- The image classification is purely random using probablity of 30% for the Ugly and   and for entertainment purposes only.
+- The image classification is purely random using probablity of 30% for the Ugly and 70% for the beautiful  and for entertainment purposes only.
 - This game does not store any images or personal data.
 
 ## Technologies Used
