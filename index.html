@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sunway Ugly and Beautiful Face Detector</title>
+    <style>
+      /* CSS styles */
+      #logo {
+    width: 150px;
+    height: auto;
+    filter: brightness(0) invert(1);
+    background-color: #fff;
+}
+
+
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+}
+
+#header {
+    background-color: #007bff;
+    padding: 20px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+#logo {
+    width: 150px;
+    height: auto;
+    filter: brightness(1.2) contrast(0.8) drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.4));
+}
+
+h1 {
+    margin-top: 160px; /* Increased margin for better spacing */
+    color: #333;
+}
+
+#inputImage {
+    margin-top: 20px;
+    display: none;
+}
+
+.captureButton {
+    font-size: medium;
+    margin-top: 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease; /* Smooth transition on hover */
+}
+
+.captureButton:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+}
+
+#result {
+    font-weight: bold;
+    margin-top: 20px;
+    color: #333;
+    font-size: 18px;
+}
+
+.hide {
+    display: none;
+}
+
+#video {
+    display: none;
+    margin-top: 20px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    max-width: 100%;
+}
+
+#canvas {
+    display: none;
+}
+
+#inputImagei {
+    margin-top: 20px;
+}
+
+#photoResultContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 30px;
+}
+
+#photoResultContainer>div {
+    margin: 10px;
+    flex: 1;
+    max-width: 300px;
+    text-align: center;
+}
+
+#photoResultContainer img {
+    max-width: 100%;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+    </style>
+</head>
+
+<body>
+    <div id="header">
+        <img id="logo" src="./files/logo.png" alt="Sunway Logo">
+    </div>
+    <h1>Sunway Ugly and Beautiful Face Detector</h1>
+    <div id="inputImagei">
+        <input type="file" id="inputImage" accept="image/*">
+        <label for="inputImage" class="captureButton">Choose Image</label>
+    </div>
+    <button id="captureButtonCam" class="captureButton">Capture from Camera</button>
+    <video id="video" autoplay></video>
+    <canvas id="canvas"></canvas>
+    <div id="photoResultContainer" class="hide">
+        <div id="imagePreview"></div>
+        <div id="result"></div>
+    </div>
+    <button id="captureButton" class="hide captureButton">Capture Your Photo</button>
+    <button id="classifyButton" class="hide captureButton">Classify</button>
+
+    <script>
+        let selectedImage;
+
+        // Check for browser compatibility with getUserMedia
+        if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+            alert('Your browser does not support camera access.');
+        }
+
+        // Event listener for selecting an image file
+        document.getElementById('inputImage').addEventListener('change', function (event) {
+            selectedImage = event.target.files[0];
+            processImage(selectedImage);
+            document.getElementById('captureButtonCam').classList.add('hide');
+            document.getElementById('classifyButton').classList.remove('hide');
+        });
+
+        // Event listener for capturing from camera
+        document.getElementById('captureButtonCam').addEventListener('click', function () {
+            document.getElementById('inputImagei').classList.add('hide');
+            const video = document.getElementById('video');
+            const canvas = document.getElementById('canvas');
+            const captureButton = document.getElementById('captureButton');
+
+            // Show the video element
+            video.style.display = 'block';
+
+            // Get user media
+            navigator.mediaDevices.getUserMedia({ video: true })
+                .then(stream => {
+                    video.srcObject = stream;
+                })
+                .catch(err => {
+                    console.error('Error accessing the camera:', err);
+                });
+
+            // Capture image from camera
+            captureButton.addEventListener('click', () => {
+                canvas.width = video.videoWidth;
+                canvas.height = video.videoHeight;
+                canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
+                const imageDataURL = canvas.toDataURL('image/png');
+                // Show captureButton element initially
+                displayCapturedImage(imageDataURL);
+                stopVideoStream();
+            });
+
+            // Stop video stream
+            function stopVideoStream() {
+                const stream = video.srcObject;
+                const tracks = stream.getTracks();
+                tracks.forEach(track => {
+                    track.stop();
+                });
+                video.style.display = 'none'; // Hide the video element after stopping the stream
+            }
+            document.getElementById('captureButtonCam').classList.add('hide');
+            document.getElementById('captureButton').classList.remove('hide');
+
+            // Display captured image
+            function displayCapturedImage(imageDataURL) {
+                const img = new Image();
+                img.src = imageDataURL;
+                document.getElementById('canvas').classList.add('hide');
+                document.getElementById('photoResultContainer').classList.remove('hide');
+                document.getElementById('imagePreview').innerHTML = '';
+                document.getElementById('imagePreview').appendChild(img);
+                // You can also store the image in a variable if you want to process or save it
+                // For example:
+                selectedImage = imageDataURL;
+                document.getElementById('captureButton').classList.add('hide');
+                document.getElementById('classifyButton').classList.remove('hide');
+            }
+        });
+
+        function processImage(imageFile) {
+            const reader = new FileReader();
+            reader.onload = function () {
+                const img = new Image();
+                img.onload = function () {
+                    // Display the captured image on the screen
+                    const imgElement = document.createElement('img');
+                    imgElement.src = reader.result;
+                    document.body.appendChild(imgElement);
+                };
+                img.src = reader.result;
+            };
+            reader.readAsDataURL(imageFile);
+        }
+
+        // Event listener for classifying the image
+        document.getElementById('classifyButton').addEventListener('click', function () {
+            if (!selectedImage) {
+                alert('Please select an image to classify.');
+                return;
+            }
+            // Replace with your actual image classification function!
+            // For example, you could use an API call or a machine learning model
+            const isUgly = Math.random() < 0.5; // Placeholder classification
+
+            const resultElement = document.getElementById('result');
+            if (isUgly) {
+                resultElement.textContent = 'You are ugly and you won.';
+            } else {
+                resultElement.textContent = 'You are beautiful and Please try next time.';
+            }
+        });
+    </script>
+</body>
+
+</html>
