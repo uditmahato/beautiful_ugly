@@ -39,6 +39,5 @@ The game requires access to the device's camera. Make sure your browser supports
 Don't forget to give credit by giving star .
 
 ## License
-This project is licensed under the [MIT License](LICENSE).
-
+This project is licensed under the [MIT License](LICENSE).You may copy this
 Enjoy playing the Beauty Classification Game!
