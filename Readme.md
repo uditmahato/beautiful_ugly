@@ -18,7 +18,7 @@ The game requires access to the device's camera. Make sure your browser supports
 - **Result Display**: The classification result is displayed to the user.
 
 ## Note
-- The image classification is purely random and for entertainment purposes only.
+- The image classification is purely random using  and for entertainment purposes only.
 - This game does not store any images or personal data.
 
 ## Technologies Used
@@ -39,5 +39,6 @@ The game requires access to the device's camera. Make sure your browser supports
 Don't forget to give credit by giving star .
 
 ## License
-This project is licensed under the [MIT License](LICENSE).You may use this game by firking this repository . You may modify this and make changes in the design and devleopment under the MIT licence .
+This project is licensed under the [MIT License](LICENSE).You may use this game by firking this repository . You may modify this and make changes in the design and devleopment under the MIT licence.
+
 Enjoy playing the Beauty Classification Game!
