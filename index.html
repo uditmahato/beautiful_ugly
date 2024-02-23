@@ -7,15 +7,22 @@
     <link href="style.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-    <div id="header">
-        <img id="logo" src="./files/logo.png" alt="Sunway Logo">
+    <div id="navbar">
+        <div id="header">
+            <img id="logo" src="./files/logo.png" alt="Sunway Logo">
+        </div>
+        <div id="title">
+            <h1>Sunway Ugly and Beautiful Face Detector</h1>
+        </div>
     </div>
-    <h1>Sunway Ugly and Beautiful Face Detector</h1>
-    <div id="inputImagei">
-        <input type="file" id="inputImage" accept="image/*">
-        <label for="inputImage" class="captureButton">Choose Image</label>
-    </div>
-    <button id="captureButtonCam" class="captureButton">Capture from Camera</button>
+    <div class="question"><h1>Choose a option to select photo !!!</h1></div>
+    <div id="buttonContainer">
+        <div id="inputImagei" class="captureButton">
+            <input type="file" id="inputImage" accept="image/*">
+            <label for="inputImage">Choose Image</label>
+        </div>
+        <button id="captureButtonCam" class="captureButton">Capture from Camera</button>
+    </div> 
     <video id="video" autoplay></video>
     <canvas id="canvas"></canvas>
     <div id="photoResultContainer" class="hide">
@@ -24,7 +31,8 @@
     </div>
     <button id="captureButton" class="hide captureButton">Capture Your Photo</button>
     <button id="classifyButton" class="hide captureButton">Classify</button>
-    <button id="classifyButton2" class="hide captureButton">Classify</button>
+    
+    <div class="questionnote"><h3><b style="color: brown;">Note:</b> you are lucky enough , our system will detect you as ugly, and you will receive a gift hamper. </h3></div><button id="classifyButton2" class="hide captureButton">Classify</button>
 </body>
 <script src="script.js"></script>
 

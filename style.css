@@ -1,9 +1,25 @@
-#logo {
-    width: 150px;
-    height: auto;
-    filter: brightness(0) invert(1);
-    background-color: #fff;
+#navbar {
+    background-color: #950808;
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    margin-top: 0!important;
 }
+
+#header {
+    flex: 0 0 auto; /* Keeps the header from growing or shrinking */
+    display: flex;
+    align-items: center; /* Align items vertically */
+    margin-left: 20px;
+}
+
+#title {
+    flex: 1; /* Allow the title to grow and fill remaining space */
+    display: flex;
+    align-items: center; /* Align items vertically */
+    margin-left: 40px; /* Add some spacing between header and title */
+}
+
 
 
 body {
@@ -14,27 +30,44 @@ body {
     padding: 0;
 }
 
+.question{
+    margin-top: 50px!important;
+    font-family:'Times New Roman';
+    font-size: 20px;
+}
+
+.questionnote{
+    margin-top: 180px;
+}
 #header {
-    background-color: #007bff;
-    padding: 20px;
-    position: fixed;
-    width: 100%;
-    top: 0;
-    left: 0;
-    z-index: 1000;
+    flex: 0 0 auto; /* Keeps the header from growing or shrinking */
+    display: flex;
+    align-items: center; /* Align items vertically */
+    z-index: 1; /* Set z-index to bring it on top */
 }
 
 #logo {
-    width: 150px;
+    width: 250px;
     height: auto;
-    filter: brightness(1.2) contrast(0.8) drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.4));
+    filter: brightness(300.2) contrast(0.9) drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.4));
 }
 
-h1 {
-    margin-top: 160px; /* Increased margin for better spacing */
-    color: #333;
+#title h1 {
+    color: #ffffff;
+    font-size: 60px;
 }
 
+#buttonContainer {
+    display: grid;
+    grid-template-columns: auto auto;
+    margin-top: 40px!important;
+    grid-gap: 150px; /* Adjust gap between buttons as needed */
+    justify-content: center; /* Center the grid horizontally */
+    margin: 0 auto; /* Center the grid horizontally */
+}
+#inputImagei, #captureButtonCam {
+    width: 200px; /* Set a fixed width for both buttons */
+}
 #inputImage {
     margin-top: 20px;
     display: none;
@@ -43,7 +76,7 @@ h1 {
 .captureButton {
     font-size: medium;
     margin-top: 20px;
-    background-color: #007bff;
+    background-color: #950808;
     color: #fff;
     border: none;
     padding: 10px 20px;
@@ -53,7 +86,10 @@ h1 {
 }
 
 .captureButton:hover {
-    background-color: #0056b3; /* Darker shade on hover */
+    color: #950808; /* Darker shade on hover */
+    border: 1px solid;
+    background-color: #f8f9fa;
+    border-color: #950808 2px;
 }
 
 #result {

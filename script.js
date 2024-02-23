@@ -104,28 +104,28 @@ document.getElementById('classifyButton').addEventListener('click', function () 
     }
     // Replace with your actual image classification function!
     // For example, you could use an API call or a machine learning model
-    const isUgly = Math.random() < 0.5; // Placeholder classification
+    const isUgly = Math.random() < 0.2; // Placeholder classification
 
     const resultElement = document.getElementById('result');
     if (isUgly) {
-        resultElement.textContent = 'You are ugly and you won.';
+        resultElement.textContent = 'You seems ugly  according to our system .Hurray !!!! you won.';
     } else {
-        resultElement.textContent = 'You are beautiful and Please try next time.';
+        resultElement.textContent = 'Our System says , You are beautiful and Sorry , Please try next time.';
     }
 });
 
 // Function to classify the image
 function classifyImage() {
     console.log("Classifying image...");
-    const isUgly = Math.random() < 0.5; // Placeholder classification
+    const isUgly = Math.random() < 0.2; // Placeholder classification
 
     const resultElement = document.getElementById('result');
     console.log("Result Element:", resultElement); // Log result element to verify if it exists
     if (resultElement) {
         if (isUgly) {
-            resultElement.textContent = 'You are ugly and you won.';
+            resultElement.textContent = 'You seems ugly  according to our system .Hurray !!!! you won.';
         } else {
-            resultElement.textContent = 'You are beautiful and Please try next time.';
+            resultElement.textContent = 'Our System says , You are beautiful and Sorry , Please try next time.';
         }
     } else {
         console.error("Result element not found.");
