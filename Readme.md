@@ -36,7 +36,7 @@ The game requires access to the device's camera. Make sure your browser supports
 - **Issues**: If you encounter any issues or have suggestions for improvement, please open an issue on the GitHub repository.
 
 ## Credits
-This game was created by @uditmahato.
+Don't forget.
 
 ## License
 This project is licensed under the [MIT License](LICENSE).
